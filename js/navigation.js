@@ -5,13 +5,13 @@ function category(){
             var divId= $(this).attr('id');
             
             $.ajax({
-                url: 'http://localhost/shop1/eshopper/shop.php',
+                url: 'http://localhost/shop.php',
                 type: 'POST',
                 data: {            
                     category: divId,            
                 },
                 success: function(response){
-                    window.location.href ="http://localhost/shop1/eshopper/shop.php";
+                    window.location.href ="http://localhost/shop.php";
                 },
                 error:function(response){
                     handleError();

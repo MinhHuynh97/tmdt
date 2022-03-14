@@ -48,7 +48,7 @@ function handleError(){
 }
 function checkLogin() {    
 	$.ajax({
-        url: 'http://localhost/shop1/eshopper/check-login.php',
+        url: 'http://localhost/check-login.php',
         type: 'POST',
         data: {
             email: document.getElementById("email").value,
