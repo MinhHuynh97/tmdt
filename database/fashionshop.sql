@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2022 at 05:02 PM
+-- Generation Time: Mar 15, 2022 at 01:47 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -24,16 +24,12 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `attributes`
+-- Table structure for table `amount_discounts`
 --
 
-CREATE TABLE `attributes` (
+CREATE TABLE `amount_discounts` (
   `id` int(11) NOT NULL,
-  `clothing_id` int(11) NOT NULL,
-  `inStock` varchar(255) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `amount` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -44,9 +40,7 @@ CREATE TABLE `attributes` (
 
 CREATE TABLE `carts` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -58,9 +52,7 @@ CREATE TABLE `carts` (
 CREATE TABLE `cart_details` (
   `cart_id` int(11) NOT NULL,
   `clothing_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -127,9 +119,8 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `status` enum('confirmed','cancelled','completed','shipping') DEFAULT NULL,
-  `total` int(11) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `voucher` int(11) DEFAULT NULL,
+  `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -141,9 +132,18 @@ CREATE TABLE `orders` (
 CREATE TABLE `order_details` (
   `order_id` int(11) NOT NULL,
   `clothing_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `percentage_discounts`
+--
+
+CREATE TABLE `percentage_discounts` (
+  `id` int(11) NOT NULL,
+  `percent` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -157,9 +157,7 @@ CREATE TABLE `ratings` (
   `value` int(11) NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
-  `clothing_id` int(11) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `clothing_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -179,8 +177,10 @@ CREATE TABLE `sequelizemeta` (
 INSERT INTO `sequelizemeta` (`name`) VALUES
 ('20220302020516-create-user.js'),
 ('20220302020517-create-category.js'),
+('20220302020518-voucher.js'),
+('20220302020520-create-percentage-discount.js'),
+('20220302020521-create-amount-discount.js'),
 ('20220302023042-create-clothing.js'),
-('20220302023043-create-attributes.js'),
 ('20220302083707-create-cart.js'),
 ('20220302083708-create-order.js'),
 ('20220302083851-create-rating.js'),
@@ -203,32 +203,43 @@ CREATE TABLE `users` (
   `image` varchar(255) DEFAULT NULL,
   `status` tinyint(1) DEFAULT 1,
   `address` varchar(255) NOT NULL,
-  `phone_no` varchar(255) NOT NULL,
-  `createdAt` datetime NOT NULL,
-  `updatedAt` datetime NOT NULL
+  `phone_no` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `dateOfBirth`, `email`, `role`, `password`, `image`, `status`, `address`, `phone_no`, `createdAt`, `updatedAt`) VALUES
-(1, 'John Doe', '1996-04-16 00:00:00', 'johndue@gmail.com', 'client', '123456', NULL, 1, '88 Dong Khoi, District 1, HCM, Viet Nam', '0909909909', '2020-11-01 16:30:07', '2020-11-01 16:30:07'),
-(2, 'Micheal Rechardo', '1996-04-16 00:00:00', 'mirechardo@gmail.com', 'client', '123456', NULL, 1, '188 Dong Khoi, District 1, HCM, Viet Nam', '0909990990', '2020-11-01 16:30:07', '2020-11-01 16:30:07'),
-(3, 'Micheal William', '1996-04-16 00:00:00', 'miwill@gmail.com', 'client', '123456', NULL, 1, '189 Dong Khoi, District 1, HCM, Viet Nam', '0909912990', '2020-11-01 16:30:07', '2020-11-01 16:30:07'),
-(4, 'Jason Rockie', '1996-04-16 00:00:00', 'rockie9090@gmail.com', 'client', '123456', NULL, 1, '289 Dong Khoi, District 1, HCM, Viet Nam', '0933912990', '2020-11-01 16:30:07', '2020-11-01 16:30:07'),
-(5, 'Jason Samatham', '1996-04-16 00:00:00', 'Samatham090@gmail.com', 'client', '123456', NULL, 1, '289 Dong Khoi, District 1, HCM, Viet Nam', '0919912990', '2020-11-01 16:30:07', '2020-11-01 16:30:07');
+INSERT INTO `users` (`id`, `name`, `dateOfBirth`, `email`, `role`, `password`, `image`, `status`, `address`, `phone_no`) VALUES
+(1, 'John Doe', '1996-04-16 00:00:00', 'johndue@gmail.com', 'client', '123456', NULL, 1, '88 Dong Khoi, District 1, HCM, Viet Nam', '0909909909'),
+(2, 'Micheal Rechardo', '1996-04-16 00:00:00', 'mirechardo@gmail.com', 'client', '123456', NULL, 1, '188 Dong Khoi, District 1, HCM, Viet Nam', '0909990990'),
+(3, 'Micheal William', '1996-04-16 00:00:00', 'miwill@gmail.com', 'client', '123456', NULL, 1, '189 Dong Khoi, District 1, HCM, Viet Nam', '0909912990'),
+(4, 'Jason Rockie', '1996-04-16 00:00:00', 'rockie9090@gmail.com', 'client', '123456', NULL, 1, '289 Dong Khoi, District 1, HCM, Viet Nam', '0933912990'),
+(5, 'Jason Samatham', '1996-04-16 00:00:00', 'Samatham090@gmail.com', 'client', '123456', NULL, 1, '289 Dong Khoi, District 1, HCM, Viet Nam', '0919912990');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vouchers`
+--
+
+CREATE TABLE `vouchers` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `attributes`
+-- Indexes for table `amount_discounts`
 --
-ALTER TABLE `attributes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `clothing_id` (`clothing_id`);
+ALTER TABLE `amount_discounts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `carts`
@@ -262,7 +273,8 @@ ALTER TABLE `clothes`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `voucher` (`voucher`);
 
 --
 -- Indexes for table `order_details`
@@ -270,6 +282,12 @@ ALTER TABLE `orders`
 ALTER TABLE `order_details`
   ADD PRIMARY KEY (`order_id`,`clothing_id`),
   ADD KEY `clothing_id` (`clothing_id`);
+
+--
+-- Indexes for table `percentage_discounts`
+--
+ALTER TABLE `percentage_discounts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ratings`
@@ -293,14 +311,14 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `vouchers`
 --
+ALTER TABLE `vouchers`
+  ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for table `attributes`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `attributes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `carts`
@@ -345,14 +363,20 @@ ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `vouchers`
+--
+ALTER TABLE `vouchers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `attributes`
+-- Constraints for table `amount_discounts`
 --
-ALTER TABLE `attributes`
-  ADD CONSTRAINT `attributes_ibfk_1` FOREIGN KEY (`clothing_id`) REFERENCES `clothes` (`id`);
+ALTER TABLE `amount_discounts`
+  ADD CONSTRAINT `amount_discounts_ibfk_1` FOREIGN KEY (`id`) REFERENCES `vouchers` (`id`);
 
 --
 -- Constraints for table `carts`
@@ -377,7 +401,8 @@ ALTER TABLE `clothes`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`voucher`) REFERENCES `vouchers` (`id`);
 
 --
 -- Constraints for table `order_details`
@@ -385,6 +410,12 @@ ALTER TABLE `orders`
 ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`clothing_id`) REFERENCES `clothes` (`id`);
+
+--
+-- Constraints for table `percentage_discounts`
+--
+ALTER TABLE `percentage_discounts`
+  ADD CONSTRAINT `percentage_discounts_ibfk_1` FOREIGN KEY (`id`) REFERENCES `vouchers` (`id`);
 
 --
 -- Constraints for table `ratings`
