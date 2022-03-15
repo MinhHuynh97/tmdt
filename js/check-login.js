@@ -48,7 +48,7 @@ function handleError(){
 }
 function checkLogin() {    
 	$.ajax({
-        url: 'http://localhost/check-login.php',
+        url: 'include/check-login.php',
         type: 'POST',
         data: {
             email: document.getElementById("email").value,

@@ -1,7 +1,7 @@
 <?php
 session_start();
 ob_start();
-include_once('database/connect.php');
+include_once('../database/connect.php');
 function checkInput($input){
 	$inputContent = "NULL";
 	if (!empty($_POST[$input])) {
