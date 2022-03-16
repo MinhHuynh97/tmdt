@@ -8,18 +8,17 @@
 	$maxitem = 7;
 	while($row = mysqli_fetch_array($result)){
 		if ($row[0]==$maxitem+1){break;}
-		$name=$row["name"];
-		$url='./shop.html';
+		$name=$row["name"];		
 	?>
-<div class="panel panel-default">
-<div class="panel-heading">
-<h4 class="panel-title"><a class="cate" id="<?=$name?>"	href="javascript:category()"><?= $name; ?></a></h4>
-</div>
-</div>	
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title"><a class="cate" id="<?=$name?>"	href="?quanly=product/category=<?=$name?>"><?= $name; ?></a></h4>
+			</div>
+		</div>	
 <?php }	?>						
-						</div>
-						<div class="shipping text-center">
-							<img src="images/home/shipping.jpg" alt="" />
-						</div>
-					</div>
+</div>
+	<div class="shipping text-center">
+		<img src="images/home/shipping.jpg" alt="" />
 	</div>
+</div>
+</div>
