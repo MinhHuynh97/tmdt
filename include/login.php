@@ -43,7 +43,7 @@
 							</span>
 							<div id="error-msg"></div>
 							<button type="button" class="btn btn-default" onclick="checkLogin()">Login</button>
-							<div id="error-msg"></div>
+							
 						</form>
 					</div><!--/login form-->
 				</div>
@@ -54,10 +54,12 @@
 					<div class="signup-form"><!--sign up form-->
 						<h2>New User Signup!</h2>
 						<form method="POST">
-							<input type="text" placeholder="Name"/>
-							<input type="email" placeholder="Email Address"/>
-							<input type="password" placeholder="Password"/>
-							<button type="submit" class="btn btn-default">Signup</button>
+							<input type="text" id='name-signup' placeholder="Name"/>
+							<input type="email" id='email-signup' placeholder="Email Address"/>
+							<input type="password" id='password-signup' placeholder="Password"/>
+							<div id="error-msg2"></div>
+							<button type="button" class="btn btn-default" onclick="checkSignup()">SignUp</button>
+							
 						</form>
 					</div><!--/sign up form-->
 				</div>
@@ -68,7 +70,7 @@
 	
 	
 	
-
+	<script src="js/check-signup.js"></script>
 	<script src="js/check-login.js"></script>
     <script src="js/jquery.js"></script>
 	<script src="js/price-range.js"></script>
