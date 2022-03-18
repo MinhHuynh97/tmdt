@@ -25,7 +25,7 @@ if(!empty($_POST)) {
 	$email	= checkInput('email');
 	$password	= checkInput('password');
 	$query = "Select * from users where email = '".$email."' AND 
-		PASSWORD = '".$password."' ";
+		PASSWORD = '".$password."' and role='client' ";
     $result = mysqli_query($con,$query);
 	$user = mysqli_fetch_array($result);
 	if($user) {

@@ -1,41 +1,61 @@
+
 <?php
 session_start();
 include('database/connect.php');
 if(isset($_POST['test1']))
-{
-    $show_giohang=mysqli_query($con,"SELECT * FROM db_giohang");
-    $i=1;
+{	
+	$id_user=$_SESSION['id_account'];
+    $show_giohang=mysqli_query($con,"SELECT carts.id,carts.user_id,cart_details.clothing_id,clothes.status,clothes.img,clothes.title,clothes.price,cart_details.quantity,clothes.quantity as quantity_stock FROM `carts`  inner join cart_details on carts.id=cart_details.cart_id inner join clothes on cart_details.clothing_id=clothes.id ");
+    
+	$i=1;
     $subtotal=0;
     $tong=0;
     while($row_show_giohang=mysqli_fetch_array($show_giohang))
     {
-        $subtotal=$row_show_giohang['giasanpham']*$row_show_giohang['soluong'];
+        $subtotal=$row_show_giohang['price']*$row_show_giohang['quantity'];
         $tong=$tong+$subtotal;
     echo "
+	
     <tr>
-							<td class='cart_product'>
-								<a href='product-details.php?id='><img src='images/cart/".$row_show_giohang['hinhanh']."' alt=''></a>
+	<td class='cart_price text-center'>
+								<p>".$row_show_giohang['id']."</p>
 							</td>
-							<td class='cart_description'>
-								<h4><a href='product-details.php'>".$row_show_giohang['tensanpham']."</a></h4>
-								<p>Web ID:".$row_show_giohang['sanpham_id']."</p>
+	<td  class=' text-center '>
+	
+		<img style='height:150px; width=350px' src='".$row_show_giohang['img']."' class='img-fluid pe-2' alt='Unsplash'>
+	
+	
+</td>
+							<td style='width:25%' class='cart_description text-center'>
+								<h4><a href='product-details.php'>".$row_show_giohang['title']."</a></h4>
+								<p>Web ID:".$row_show_giohang['clothing_id']."</p>
 							</td>
-							<td class='cart_price'>
-								<p>".$row_show_giohang['giasanpham'].'$'."</p>
+							<td class='cart_price text-center'>
+								<p>".$row_show_giohang['price'].'$'."</p>
 							</td>
-							<td class='cart_quantity'>
-								<div class='cart_quantity_button'>
+							<td class='d-none d-xl-table-cell text-center'>
+								
 									
 									
-									<input class='cart_quantity_input' id='soluong_item_giohang' min='1' id_slgh=".$row_show_giohang['sanpham_id']." type='number' value=".$row_show_giohang['soluong']."   >
-								</div>
+									<input style='
+									width: 60%;
+									text-align: center;
+									display: inline-table;
+									
+									margin-bottom: 12px;
+									font-size: 18px;
+								'class='form-control' id='soluong_item_giohang' min='1' max='".$row_show_giohang['quantity_stock']."' id_slgh=".$row_show_giohang['clothing_id']." type='number' value=".$row_show_giohang['quantity']."   >
+								
 							</td>
-							<td class='cart_total'>
-								<p class='cart_total_price'>".$subtotal.'$'."</p>
+							<td class='cart_price text-center'>
+								<p >".$subtotal.'$'."</p>
 							</td>
-							<td class='cart_delete'>
-								<input style='width: 50px;' id_xoa=".$row_show_giohang['sanpham_id']." class='btn btn-danger xoa_item_giohang' type='button' value='Xóa'>
-							</td>
+							
+							<td class='d-none d-xl-table-cell text-center'><a class='align-middle' href=\"javascript:delproduct(id=".$row_show_giohang['clothing_id'].")\"'><i class='fa-solid fa-trash xoa_item_giohang' style='
+							color:red;
+							margin-bottom: 15px;
+							font-size: 15px;'
+						></i></a></td>
 						</tr>
                         ";
     }

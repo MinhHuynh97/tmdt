@@ -1,5 +1,8 @@
+
+
 $(document).ready(function(){
     showDataGioHang();
+	showTotal()
     function showDataGioHang(){
         $.ajax({
             url:'./giohang_show.php',
@@ -16,6 +19,22 @@ $(document).ready(function(){
             }
         })
     }
+    function showTotal(){
+        $.ajax({
+            url:'./giohang_total.php',
+            type:'POST',
+            data:{
+                test2:1
+            },
+            success:function(res){
+                
+                $('#total_cart').html(res);
+                
+            
+            
+            }
+        })
+    }
     $(document).on('input','#soluong_item_giohang',function(){
 		var id_giohang=$(this).attr('id_slgh');
 		var sl_gh=$(this).val();
@@ -23,27 +42,33 @@ $(document).ready(function(){
 				url:'./giohang_sl.php',
 				type:'POST',
 				data:{
+                    
 					id_giohang:id_giohang,
 					sl_gh:sl_gh
 				},
 				success:function(res){
 					
 					showDataGioHang();
-					
+					showTotal()
 				}
 			})
 	})
-    $(document).on('click','.xoa_item_giohang',function(){
-		var id_giohang_de=$(this).attr('id_xoa');
+	
+    $(document).on('click','.update',function(){
+		var code_amount=document.getElementById("code_amount").value;
+        var code_gift=document.getElementById("code_gift").value;
 		$.ajax({
-				url:'./giohang_delete.php',
+				url:'./giohang_total.php',
 				type:'POST',
 				data:{
-					id_giohang_de:id_giohang_de
+                    test2:1,
+                    code_amount:code_amount,
+					code_gift:code_gift
 				},
 				success:function(res){
-					alert(1);
+					alert(res);
 					showDataGioHang();
+                    $('#total_cart').html(res);
 					
 				}
 			})

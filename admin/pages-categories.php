@@ -224,6 +224,7 @@ elseif(isset($_POST['add']))
 		<?php
 		}
 		?>
+		
 		<script>
     function delproduct(id){
         var msg = confirm("Are you sure you want to delete this product?");
