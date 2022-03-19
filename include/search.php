@@ -1,11 +1,12 @@
 <?php
-    //include trong shop.php
+    
     include_once('../database/connect.php');
     $value=$_POST['search'];
     $list_item=array();
+    //$html as response ajax
     $html_show='';
-    if (isset($_POST['search'])) {
-        $value=$_POST['search'];          
+    if (isset($$_POST['search_value'])) {    
+        $value=$_POST['search_value'];         
         $query="SELECT * FROM clothes LEFT JOIN categories ON clothes.category = categories.id
                 where ";
         $searchValue    = '^.*'.$value.'+.*$';
@@ -33,7 +34,7 @@
             }
         }else{
             //show not found
-            $html_show = "notfound";	//	
+            $html_show = "<p>Not Found</p>";	//	
 		    echo $html_show;
         }     
     }
