@@ -282,8 +282,7 @@
 		
 	</footer><!--/Footer-->
 	
-	<script src="js/navigation.js"></script>
-	<script src="js/check-login.js"></script>
+	
     <script src="js/jquery.js"></script>
 	
 	<script src="js/bootstrap.min.js"></script>
@@ -291,6 +290,10 @@
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
-	<script src="js/script.js"></script>
+	<script src="js/script.js"></script>	
+	<script src="js/check-login.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/check-signup.js"></script>
+
 </body>
 </html>
