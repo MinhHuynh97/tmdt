@@ -69,9 +69,9 @@ elseif(isset($_POST['add']))
 									<thead>
 										<tr>
 											<th class="text-center">Id</th>
-											<th class="d-none d-xl-table-cell text-center">Name</th>
-											<th class="d-none d-xl-table-cell text-center">Manage</th>
-											<th class="d-none d-xl-table-cell text-center">Check</th>
+											<th class="text-center">Name</th>
+											<th class="text-center">Manage</th>
+											<th class="text-center">Check</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -81,14 +81,14 @@ elseif(isset($_POST['add']))
 									?>
 										<tr>
 											
-											<td class="d-center d-xl-table-cell text-center"><?php echo $row_cate['id'] ?></td>
+											<td class="text-center"><?php echo $row_cate['id'] ?></td>
 											<?php
 												if(isset($_GET['update']) &&$_GET['update']==$row_cate['id'])
 												{
 												
 											?>
 											<form action="" method="post">
-											<td class="d-none d-xl-table-cell text-center">
+											<td class="text-center">
 												
 												<input name="cate" style="
 													width: 50%;
@@ -96,19 +96,19 @@ elseif(isset($_POST['add']))
 													display: inline-table;
 												"  type="text" class="form-control" placeholder="<?php echo $row_cate['name'] ?>">
 											
-											<td class="d-none d-xl-table-cell text-center"><button name="confirm" class="btn btn-primary">Confirmed</button> <button name="back" class="btn btn-secondary">Back</button></td>
+											<td class="text-center"><button name="confirm" class="btn btn-primary">Confirmed</button> <button name="back" class="btn btn-secondary">Back</button></td>
 											
 											
 											</form>
-											<td class="d-none d-xl-table-cell text-center"><a class="align-middle" href=""><i class="align-middle" data-feather="eye"></i></a></td>		
+											<td class="text-center"><a class="align-middle" href=""><i class="align-middle" data-feather="eye"></i></a></td>		
 											</td>
 											<?php
 												}else{
 											?>
-											<td class="d-none d-xl-table-cell text-center"><?php echo $row_cate['name'] ?></td>
-											<td class="d-none d-xl-table-cell text-center"><a class="align-middle" href="?quanly=categories&update=<?php echo $row_cate['id'] ?>"><i class="align-middle" data-feather="edit"></i></a> <?php echo "<a class='align-middle' href=\"javascript:delproduct(id=".$row_cate['id'].")\"><i class='align-middle' data-feather='trash'></i></a>";?> </td>
+											<td class="text-center"><?php echo $row_cate['name'] ?></td>
+											<td class="text-center"><a class="align-middle" href="?quanly=categories&update=<?php echo $row_cate['id'] ?>"><i class="align-middle" data-feather="edit"></i></a> <?php echo "<a class='align-middle' href=\"javascript:delproduct(id=".$row_cate['id'].")\"><i class='align-middle' data-feather='trash'></i></a>";?> </td>
 											
-											<td class="d-none d-xl-table-cell text-center"><a class="align-middle" href="?quanly=categories&check=<?php echo $row_cate['id'] ?>"><i class="align-middle" data-feather="eye"></i></a></td>
+											<td class="text-center"><a class="align-middle" href="?quanly=categories&check=<?php echo $row_cate['id'] ?>"><i class="align-middle" data-feather="eye"></i></a></td>
 											<?php
 												}
 											?>
@@ -173,11 +173,11 @@ elseif(isset($_POST['add']))
 									<thead>
 										<tr>
 											<th class="text-center">Id</th>
-											<th class="d-none d-xl-table-cell text-center">Image</th>
-											<th class="d-none d-xl-table-cell text-center">Title</th>
-											<th class="d-none d-xl-table-cell text-center">Type</th>
-											<th class="d-none d-xl-table-cell text-center">Price</th>
-											<th class="d-none d-xl-table-cell text-center">Quantity</th>
+											<th class="text-center">Image</th>
+											<th class="text-center">Title</th>
+											<th class="text-center">Type</th>
+											<th class="text-center">Price</th>
+											<th class="text-center">Quantity</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -188,17 +188,17 @@ elseif(isset($_POST['add']))
 										<tr>
 											
 											<td style="width:10%" class="text-center"><?php echo $row_clothes['id']?></td>
-											<td style="width:40%" class="d-none d-xl-table-cell text-center ">
+											<td style="width:40%" class="text-center ">
 												<div class="col-6 col-md-4 col-lg-4 col-xl-3 d-inline-block">
 													<img src="<?php echo $row_clothes['img']?>" class="img-fluid pe-2" alt="Unsplash">
 												</div>
 												
 											</td>
-											<td  style="width:20%" class="d-none d-xl-table-cell text-center"><?php echo $row_clothes['title']?></td>
-											<td  style="width:20%" class="d-none d-xl-table-cell text-center"><?php echo $row_clothes['sex']?></td>
+											<td  style="width:20%" class="text-center"><?php echo $row_clothes['title']?></td>
+											<td  style="width:20%" class="text-center"><?php echo $row_clothes['sex']?></td>
 
-											<td  style="width:10%" class="d-none d-xl-table-cell text-center"><?php echo $row_clothes['price']?>$</td>
-											<td  style="width:10%" class="d-none d-xl-table-cell text-center"><?php echo $row_clothes['quantity']?></td>
+											<td  style="width:10%" class="text-center"><?php echo $row_clothes['price']?>$</td>
+											<td  style="width:10%" class="text-center"><?php echo $row_clothes['quantity']?></td>
 											
 											
 											

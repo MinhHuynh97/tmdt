@@ -1,4 +1,6 @@
-
+<?php
+include_once('../database/connect.php');
+?>
 <main class="content">
 				<div class="container-fluid p-0">
 						<div class="col-md-12 col-xl-12">
@@ -8,18 +10,45 @@
 									<h5 class="card-title mb-0">Rating</h5>
 								</div>
 								<div class="card-body h-100">
-
+									<?php 
+										$cmt=mysqli_query($con,"SELECT value,comment,clothes.title as cloth_name,users.name as user_name FROM ratings,users,clothes WHERE ratings.user_id=users.id and ratings.clothing_id=clothes.id");
+										
+										while($row_cmt=mysqli_fetch_array($cmt)){
+											
+									?>
 									<div class="d-flex align-items-start">
-										<img src="img/avatars/avatar-5.jpg" width="36" height="36" class="rounded-circle me-2" alt="Vanessa Tucker">
+										<!-- <img src="" width="36" height="36" class="rounded-circle me-2" alt=""> -->
 										<div class="flex-grow-1">
-											<small class="float-end text-navy">5m ago</small>
-											<strong>Vanessa Tucker</strong> started following <strong>Christina Mason</strong><br />
-											<small class="text-muted">Today 7:51 pm</small><br />
+											<!-- <small class="float-end text-navy">30m ago</small> -->
+											<strong><?php echo $row_cmt['user_name'] ?></strong> posted something on <strong><?php echo $row_cmt['cloth_name'] ?></strong>'s rating<br />
+											<div class="d-flex">
+											<small style="margin-right: 10px;" class="text-muted">Today 7:21 pm</small>
+											<?php
+											for($i=0;$i<$row_cmt['value'];$i++)
+											{
 
+											
+											?>
+											<i style="margin-left: 5px;" class="align-middle" data-feather="star"></i>
+											<?php
+											}
+											?>
+										</div>
+											
+
+											<div class="border text-sm text-muted p-2 mt-1">
+												<?php echo $row_cmt['comment'] ?>
+											</div>
+
+											<!-- <a href="#" class="btn btn-sm btn-danger mt-1"><i class="feather-sm" data-feather="heart"></i> Like</a> -->
 										</div>
 									</div>
+									<!-- <hr /> -->
+									<?php
+										}
+									?>
 
-									<hr />
+									
 									<!-- <div class="d-flex align-items-start">
 										<img src="img/avatars/avatar.jpg" width="36" height="36" class="rounded-circle me-2" alt="Charles Hall">
 										<div class="flex-grow-1">

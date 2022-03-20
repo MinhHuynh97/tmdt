@@ -264,7 +264,7 @@
 												}
 											?>
 											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-											<td><a href="" class="align-middle"> <i class="align-middle" data-feather="eye"></i></a></td>
+											<td><a href="?quanly=orderdetail&od=<?php echo $order['id']?>" class="align-middle"> <i class="align-middle" data-feather="eye"></i></a></td>
 										</tr>
 										<?php 
 										}

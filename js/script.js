@@ -66,7 +66,7 @@ $(document).ready(function(){
 					code_gift:code_gift
 				},
 				success:function(res){
-					alert(res);
+					
 					showDataGioHang();
                     $('#total_cart').html(res);
 					

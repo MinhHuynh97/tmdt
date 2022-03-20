@@ -72,20 +72,14 @@
 						<a class="sidebar-link" href="?quanly=home">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
-					</li>
-
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.html">
-              <i class="align-middle" data-feather="shopping-bag"></i> <span class="align-middle">Order detail</span>
-            </a>
-					</li>
+					
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="?quanly=categories">
               <i class="align-middle" data-feather="package"></i> <span class="align-middle">Categories</span>
             </a>
 					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="pages-profile.html">
+						<a class="sidebar-link" href="?quanly=clothes">
               <i class="align-middle" data-feather="briefcase"></i> <span class="align-middle">Items</span>
             </a>
 					</li>
@@ -109,7 +103,7 @@
 
 					
 
-					<li class="sidebar-header">
+					<!-- <li class="sidebar-header">
 						Tools & Components
 					</li>
 
@@ -170,7 +164,7 @@
 							<a href="upgrade-to-pro.html" class="btn btn-primary">Upgrade to Pro</a>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</nav>
 
@@ -218,7 +212,7 @@
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark"><?php echo $_SESSION["dangnhap"] ?></span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
 								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -252,6 +246,12 @@
 				elseif($ql=='categories')
 				{
 					include('pages-categories.php');
+				}elseif($ql=='orderdetail')
+				{
+					include('order_detail.php');
+				}elseif($ql=='clothes')
+				{
+					include('pages_clothes.php');
 				}
 				
 			}else
