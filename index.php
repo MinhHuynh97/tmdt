@@ -67,21 +67,22 @@
 				<?php
 				if(isset($_GET['quanly']))
 				{
-					$tam=$_GET['quanly'];
+					if (isset($_GET['id']))
+					{
+						include_once("include/category-sidebar.php");
+						include_once("include/product-deatils.php");
+					}
+					$tam=$_GET['quanly'];	
 					if($tam=='product')
 					{
 						include_once("include/category-sidebar.php");
-						include_once("include/shop.php");
+						include_once("include/product.php");
 					}elseif($tam=='home')
 					{
 						include_once("include/category-sidebar.php");
 						include_once("include/home.php");
 					}
-					elseif($tam=='productdetail')
-					{
-						include_once("include/category-sidebar.php");
-						include_once("include/product-details.php");
-					}
+					
 					elseif($tam=='checkout')
 					{
 						

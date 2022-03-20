@@ -55,7 +55,6 @@
 								<li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="?quanly=product">Products</a></li>
-										<li><a href="?quanly=productdetail">Product Details</a></li> 
 										<li><a href="?quanly=checkout">Checkout</a></li> 
 										<li><a href="?quanly=cart">Cart</a></li> 
 										<li><a href="?quanly=login">Login</a></li> 
