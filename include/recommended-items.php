@@ -40,7 +40,7 @@ while (count($item_list) != 0) {
 ?>
 <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
 	<div class="carousel-inner">
-		<?php echo $group_item; ?> <a href=""></a>
+		<?php echo $group_item; ?>
 	</div>
 	<a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
 		<i class="fa fa-angle-left"></i></a>
