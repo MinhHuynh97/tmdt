@@ -1,130 +1,115 @@
 <?php
-	session_start();
-	include_once('database/connect.php');
-	
+session_start();
+include_once('database/connect.php');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Home | E-Shopper</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Home | E-Shopper</title>
 	<style>
-	.xoa_item_giohang:hover{
-		cursor: pointer;
-	}
-</style>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/price-range.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
+		.xoa_item_giohang:hover {
+			cursor: pointer;
+		}
+	</style>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/prettyPhoto.css" rel="stylesheet">
+	<link href="css/price-range.css" rel="stylesheet">
+	<link href="css/animate.css" rel="stylesheet">
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
+	<!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
-    <![endif]-->       
+    <![endif]-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-</head><!--/head-->
+	<link rel="shortcut icon" href="images/ico/favicon.ico">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<!--/head-->
 
 <body>
-	<header id="header"><!--header-->
+	<header id="header">
+		<!--header-->
 		<?php
 		include_once('include/header.php');
 		?>
 		<!--/header-middle-->
 
 		<?php
-		if(isset($_GET['quanly']))
-		{
-			$tam=$_GET['quanly'];
-			if($tam=='product')
-			{
+		if (isset($_GET['quanly'])) {
+			$tam = $_GET['quanly'];
+			if ($tam == 'product') {
 				include_once('include/slider-product.php');
-			}elseif($tam=='home')
-			{
+			} elseif ($tam == 'home') {
 				include_once('include/slider-home.php');
 			}
-		}
-		else
-		include_once('include/slider-home.php');
+		} else
+			include_once('include/slider-home.php');
 		?>
-	</header><!--/header-->
-	
-	
-	
+	</header>
+	<!--/header-->
+
+
+
 	<section>
 		<div class="container">
 			<div class="row">
 				<?php
-				if(isset($_GET['quanly']))
-				{
-					$tam=$_GET['quanly'];
-					if($tam=='product')
-					{
-						include_once("include/category-sidebar.php");
-						include_once("include/shop.php");
-					}elseif($tam=='home')
-					{
-						include_once("include/category-sidebar.php");
-						include_once("include/home.php");
-					}
-					elseif($tam=='productdetail')
-					{
+				if (isset($_GET['quanly'])) {
+					if (isset($_GET['id'])) {
 						include_once("include/category-sidebar.php");
 						include_once("include/product-details.php");
+					} else {
+						$tam = $_GET['quanly'];
+						if ($tam == 'product') {
+							include_once("include/category-sidebar.php");
+							include_once("include/product.php");
+						} elseif ($tam == 'home') {
+							include_once("include/category-sidebar.php");
+							include_once("include/home.php");
+						} elseif ($tam == 'checkout') {
+
+							include_once("include/checkout.php");
+						} elseif ($tam == 'cart') {
+
+							include_once("include/cart.php");
+						} elseif ($tam == 'login') {
+
+							include_once("include/login.php");
+						} elseif ($tam == 'contact') {
+							include_once("include/contact-us.php");
+						} elseif ($tam == 'blog') {
+							include_once("include/category-sidebar.php");
+							include_once("include/blog.php");
+						} elseif ($tam == 'blogsingle') {
+							include_once("include/category-sidebar.php");
+							include_once("include/blog-single.php");
+						}
 					}
-					elseif($tam=='checkout')
-					{
-						
-						include_once("include/checkout.php");
-					}
-					elseif($tam=='cart')
-					{
-						
-						include_once("include/cart.php");
-					}
-					elseif($tam=='login')
-					{
-						
-						include_once("include/login.php");
-					}elseif($tam=='contact')
-					{
-						include_once("include/contact-us.php");
-					}
-					elseif($tam=='blog')
-					{
-						include_once("include/category-sidebar.php");
-						include_once("include/blog.php");
-					}elseif($tam=='blogsingle')
-					{
-						include_once("include/category-sidebar.php");
-						include_once("include/blog-single.php");
-					}
-					
-				}
-				else
-				{
+				} else {
 					require_once("include/category-sidebar.php");
 					require_once("include/home.php");
 				}
 				?>
-				
-				
-				
+
+
+
 			</div>
 		</div>
 	</section>
-	
-	<footer id="footer"><!--Footer-->
+
+	<footer id="footer">
+		<!--Footer-->
 		<div class="footer-top">
 			<div class="container">
 				<div class="row">
@@ -149,7 +134,7 @@
 								<h2>24 DEC 2014</h2>
 							</div>
 						</div>
-						
+
 						<div class="col-sm-3">
 							<div class="video-gallery text-center">
 								<a href="#">
@@ -164,7 +149,7 @@
 								<h2>24 DEC 2014</h2>
 							</div>
 						</div>
-						
+
 						<div class="col-sm-3">
 							<div class="video-gallery text-center">
 								<a href="#">
@@ -179,7 +164,7 @@
 								<h2>24 DEC 2014</h2>
 							</div>
 						</div>
-						
+
 						<div class="col-sm-3">
 							<div class="video-gallery text-center">
 								<a href="#">
@@ -204,7 +189,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="footer-widget">
 			<div class="container">
 				<div class="row">
@@ -266,11 +251,11 @@
 							</form>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
@@ -279,21 +264,23 @@
 				</div>
 			</div>
 		</div>
-		
-	</footer><!--/Footer-->
-	
-	
-    <script src="js/jquery.js"></script>
-	
+
+	</footer>
+	<!--/Footer-->
+
+
+	<script src="js/jquery.js"></script>
+
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.scrollUp.min.js"></script>
 	<script src="js/price-range.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-	<script src="js/script.js"></script>	
+	<script src="js/jquery.prettyPhoto.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/script.js"></script>
 	<script src="js/check-login.js"></script>
 	<script src="js/search.js"></script>
 	<script src="js/check-signup.js"></script>
 
 </body>
+
 </html>
