@@ -239,7 +239,7 @@
 										<tr>
 											<td><?php echo $order['id'] ?></td>
 											<td class="d-none d-xl-table-cell"><?php echo $order['createdAt'] ?></td>
-											<td class="d-none d-xl-table-cell"><?php echo $order['total'] ?></td>
+											<td class="d-none d-xl-table-cell"><?php echo $order['total'] ?>$</td>
 											<?php
 												if ($order['status']=='confirmed')
 												{

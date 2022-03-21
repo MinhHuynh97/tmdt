@@ -89,7 +89,7 @@ include_once('../database/connect.php');
 										$order_cus=mysqli_query($con,"SELECT * from orders where user_id=$id_cus");
 										
 									?>
-									<h5 class="card-title mb-0">Order ' <?php echo $row_name['name'] ?></h5>
+									<h5 class="card-title mb-0">Order ' <?php echo $row_name['name'] ;?></h5>
 							</div>
 								<table class="table table-hover my-0">
 									<thead>
@@ -108,7 +108,7 @@ include_once('../database/connect.php');
 										while($row_order_cus=mysqli_fetch_array($order_cus)){
 									?>
 										<tr>
-											<td class="d-none d-xl-table-cell"><?php echo $row_order_cus['id'] ?></td>
+											<td class="d-none d-xl-table-cell"><?php echo $row_order_cus['id']; ?></td>
 											<?php
 												if ($row_order_cus['status']=='confirmed')
 												{
@@ -153,5 +153,6 @@ include_once('../database/connect.php');
 
 <?php
 	}
+
 ?>
 			

@@ -34,7 +34,7 @@ if(isset($_GET['did']))
 			<div class="breadcrumbs">
 				<ol class="breadcrumb">
 				  <li><a href="#">Home</a></li>
-				  <li class="active">Shopping Cart</li>
+				  <li class="active">Shopping Cart'<?php echo $_SESSION['name'] ?></li>
 				</ol>
 			</div>
 			<div class="table-responsive cart_info">
