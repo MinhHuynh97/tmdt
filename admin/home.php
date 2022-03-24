@@ -94,11 +94,18 @@
               <i class="align-middle" data-feather="star"></i> <span class="align-middle">Rating</span>
             </a>
 					</li>
+					</li>
 					<li class="sidebar-item">
-						<a class="sidebar-link" href="?quanly=logout">
-              <i class="align-middle" data-feather="star"></i> <span class="align-middle">LogOut</span>
+						<a class="sidebar-link" href="?quanly=blog">
+              <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">Blog</span>
             </a>
 					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="?quanly=logout">
+              <i class="align-middle" data-feather="log-out"></i> <span class="align-middle">LogOut</span>
+            </a>
+					</li>
+					
 
 
 					
@@ -252,6 +259,10 @@
 				}elseif($ql=='clothes')
 				{
 					include('pages_clothes.php');
+				}
+				elseif($ql=='blog')
+				{
+					include('pages_blog.php');
 				}
 				
 			}else
