@@ -60,14 +60,11 @@
 										<li><a href="?quanly=login">Login</a></li> 
                                     </ul>
                                 </li> 
-								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="?quanly=blog">Blog List</a></li>
-										<li><a href="?quanly=blogsingle">Blog Single</a></li>
-                                    </ul>
+								<li ><a href="?quanly=blog">Blog</a>
+                                    
                                 </li> 
-								<li><a href="?quanly=404">404</a></li>
-								<li><a href="?quanly=contact">Contact</a></li>
+								<!-- <li><a href="?quanly=404">404</a></li> -->
+								<!-- <li><a href="?quanly=contact">Contact</a></li> -->
 							</ul>
 						</div>
 					</div>

@@ -23,7 +23,7 @@ if(isset($_POST['back']))
 	$sex=$_POST['sex'];
 	$soluong=$_POST['quantity'];
 	$path='../images/';
-	$sql_insert_sanpham=mysqli_query($con,"INSERT INTO `clothes` (`id`, `status`, `img`, `title`, `description`, `category`, `sex`, `price`, `quantity`) VALUES (NULL, '$status', '$hinhanh', '$tensanpham', '$chitiet', '$danhmuc', '$sex', '$giasanpham', '$soluong');");
+	$sql_insert_sanpham=mysqli_query($con,"INSERT INTO `clothes` (`id`, `status`, `img`, `title`, `description`, `category`, `sex`, `price`, `quantity`) VALUES (NULL, '$status', '$path$hinhanh', '$tensanpham', '$chitiet', '$danhmuc', '$sex', '$giasanpham', '$soluong');");
 	
 	move_uploaded_file($hinhanh_tmp,$path.$hinhanh);
 	
@@ -49,7 +49,7 @@ elseif(isset($_POST['update']))
 		$sql_insert_sanpham=mysqli_query($con,"UPDATE`clothes` set  `status`='$status', `title`='$tensanpham', `description`='$chitiet', `category`='$danhmuc', `sex`='$sex', `price`='$giasanpham', `quantity`='$soluong' where id=".$_GET['update']."");
 	}else{
 		move_uploaded_file($hinhanh_tmp,$path.$hinhanh);
-		$sql_insert_sanpham=mysqli_query($con,"UPDATE`clothes` set  `status`='$status', 'img'='$hinhanh', `title`='$tensanpham', `description`='$chitiet', `category`='$danhmuc', `sex`='$sex', `price`='$giasanpham', `quantity`='$soluong' where id=".$_GET['update']."");
+		$sql_insert_sanpham=mysqli_query($con,"UPDATE`clothes` set  `status`='$status', 'img'='$path$hinhanh', `title`='$tensanpham', `description`='$chitiet', `category`='$danhmuc', `sex`='$sex', `price`='$giasanpham', `quantity`='$soluong' where id=".$_GET['update']."");
 		
 	}
 	echo "<script>window.location.href='?quanly=clothes'</script>";

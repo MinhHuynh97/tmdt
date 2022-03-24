@@ -56,8 +56,27 @@ if (isset($_GET['id'])) {
 			</div>
 			<div class="tab-content">
 				<div class="tab-pane fade" id="details">
-					<!-- Detail of product-->
-					<p> this is a sample detail about product. will be add to database later.</p>
+
+					<?php $detail = mysqli_query($con, "SELECT * FROM product_detail WHERE $id = id ");
+						if (mysqli_num_rows($detail) > 0) {
+							$descrip = mysqli_fetch_array($detail);
+					?>
+						<div class="single-detail">
+							<center>
+								<h3> <?php echo $product['title'] ?></h3>
+							</center>
+
+							<img src=" <?php echo $descrip['img1'] ?>" alt="Fist image about product">
+
+							<div class="product-detail">
+								<p> <?php echo $descrip['first'] ?></p>
+							</div>
+							<img src="<?php echo $descrip['img2'] ?>" alt="Fist image about product">
+							<div class="product-detail">
+								<p> <?php echo $descrip['second'] ?></p>
+							</div>
+						</div>
+					<?php } ?>
 				</div>
 
 				<div class="tab-pane fade" id="related">

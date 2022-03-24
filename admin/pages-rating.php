@@ -11,7 +11,7 @@ include_once('../database/connect.php');
 								</div>
 								<div class="card-body h-100">
 									<?php 
-										$cmt=mysqli_query($con,"SELECT value,comment,clothes.title as cloth_name,users.name as user_name FROM ratings,users,clothes WHERE ratings.user_id=users.id and ratings.clothing_id=clothes.id");
+										$cmt=mysqli_query($con,"SELECT value,comment,clothes.title as cloth_name,users.name as user_name,ratings.date FROM ratings,users,clothes WHERE ratings.user_id=users.id and ratings.clothing_id=clothes.id");
 										
 										while($row_cmt=mysqli_fetch_array($cmt)){
 											
@@ -20,9 +20,9 @@ include_once('../database/connect.php');
 										<!-- <img src="" width="36" height="36" class="rounded-circle me-2" alt=""> -->
 										<div class="flex-grow-1">
 											<!-- <small class="float-end text-navy">30m ago</small> -->
-											<strong><?php echo $row_cmt['user_name'] ?></strong> posted something on <strong><?php echo $row_cmt['cloth_name'] ?></strong>'s rating<br />
+											<strong><?php echo $row_cmt['user_name'] ?></strong> posted on <strong><?php echo $row_cmt['cloth_name'] ?></strong>'s rating<br />
 											<div class="d-flex">
-											<small style="margin-right: 10px;" class="text-muted">Today 7:21 pm</small>
+											<small style="margin-right: 10px;" class="text-muted"><?php echo $row_cmt['date'] ?></small>
 											<?php
 											for($i=0;$i<$row_cmt['value'];$i++)
 											{

@@ -1,30 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Blog | E-Shopper</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
-    <link href="css/price-range.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->       
-    <link rel="shortcut icon" href="images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-</head><!--/head-->
+<?php
+include_once('./database/connect.php');
+?>
 
-<body>
 	
 	
 	<section>
@@ -33,29 +10,37 @@
 				<div class="col-sm-9">
 					<div class="blog-post-area">
 						<h2 class="title text-center">Latest From our Blog</h2>
+						<?php
+						$blog_list=mysqli_query($con,"SELECT blog.id as id,blog.title as title,blog.brieft as brieft, blog.date as date, blog.img as img, user_blog.name as author from blog, user_blog WHERE blog.id=user_blog.blog_id and user_blog.role='author'");
+						while($row_blog=mysqli_fetch_array($blog_list)){
+						?>
+
 						<div class="single-blog-post">
-							<h3>Girls Pink T Shirt arrived in store</h3>
+							<h3><?php echo $row_blog['title'] ?></h3>
 							<div class="post-meta">
 								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
-									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+									<li><i class="fa fa-user"></i><?php echo $row_blog['author'] ?></li>
+									<li><i class="fa fa-clock-o"></i><?php echo $row_blog['date'] ?></li>
+									
 								</ul>
-								<span>
+								<!-- <span>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star-half-o"></i>
-								</span>
+								</span> -->
 							</div>
 							<a href="">
-								<img src="images/blog/blog-one.jpg" alt="">
+								<img src="images/blog/<?php echo $row_blog['img'] ?>" alt="">
 							</a>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-							<a  class="btn btn-primary" href="">Read More</a>
+							<p><?php echo $row_blog['brieft'] ?></p>
+							<a  class="btn btn-primary" href="?quanly=blogsingle&blog_id=<?php echo $row_blog['id'] ?>">Read More</a>
 						</div>
-						<div class="single-blog-post">
+						<?php
+						}
+						?>
+						<!-- <div class="single-blog-post">
 							<h3>Girls Pink T Shirt arrived in store</h3>
 							<div class="post-meta">
 								<ul>
@@ -106,7 +91,7 @@
 								<li><a href="">3</a></li>
 								<li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
 							</ul>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			
@@ -116,12 +101,3 @@
 	
 	
 
-  
-    <script src="js/jquery.js"></script>
-	<script src="js/price-range.js"></script>
-	<script src="js/jquery.scrollUp.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-</body>
-</html>
