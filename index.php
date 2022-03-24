@@ -8,6 +8,7 @@ include_once('database/connect.php');
 
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
@@ -80,6 +81,9 @@ include_once('database/connect.php');
 						} elseif ($tam == 'checkout') {
 
 							include_once("include/checkout.php");
+						} elseif ($tam == 'orders') {
+
+							include_once("include/orders.php");
 						} elseif ($tam == 'cart') {
 
 							include_once("include/cart.php");

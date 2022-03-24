@@ -96,7 +96,7 @@ if(isset($_GET['did']))
 							
 						</ul>
 							
-							<a class="btn btn-default check_out" href="">Check Out</a>
+							<a class="btn btn-default check_out" href="?quanly=checkout">Check Out</a>
 					</div>
 				</div>
 			</div>
