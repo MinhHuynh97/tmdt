@@ -93,7 +93,16 @@ $(document).ready(function () {
             if (num_item_on_cart != 0 && ((num_item_on_cart + quantity) > remain_quantity)) { alert('There is ' + num_item_on_cart + ' item on your cart\n' + 'There is ' + remain_quantity + ' item  on stock.\nYou choose to must item') }
             else {
                 var new_quantity = quantity + num_item_on_cart;
-                $(this).attr('num-item-on-cart', new_quantity);
+                // new , set all button have same attr
+                $("button").each(function(){
+                    if  ($(this).attr('product-id') == id){
+                            $(this).attr('num-item-on-cart',new_quantity);
+                    }
+
+                })
+                //
+
+                //$(this).attr('num-item-on-cart', new_quantity); 
                 $.ajax({
                     url: 'include/add-to-cart.php',
                     method: 'POST',
