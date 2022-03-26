@@ -46,11 +46,33 @@ elseif(isset($_POST['update']))
 	$path='../images/';
 	if($hinhanh=='')
 	{
-		$sql_insert_sanpham=mysqli_query($con,"UPDATE`clothes` set  `status`='$status', `title`='$tensanpham', `description`='$chitiet', `category`='$danhmuc', `sex`='$sex', `price`='$giasanpham', `quantity`='$soluong' where id=".$_GET['update']."");
+		
+		$sql_update_sanpham=mysqli_query($con,"UPDATE`clothes` set  `status`='$status', `title`='$tensanpham', `description`='$chitiet', `category`='$danhmuc', `sex`='$sex', `price`='$giasanpham', `quantity`='$soluong' where id=".$_GET['update']."");
 	}else{
 		move_uploaded_file($hinhanh_tmp,$path.$hinhanh);
-		$sql_insert_sanpham=mysqli_query($con,"UPDATE`clothes` set  `status`='$status', 'img'='$path$hinhanh', `title`='$tensanpham', `description`='$chitiet', `category`='$danhmuc', `sex`='$sex', `price`='$giasanpham', `quantity`='$soluong' where id=".$_GET['update']."");
+		$img=$path.$hinhanh;
 		
+
+
+
+		$sql_update_sanpham=mysqli_query($con,"UPDATE clothes set  status='$status', img='$img', title='$tensanpham', description='$chitiet', category='$danhmuc', sex='$sex', price='$giasanpham', quantity='$soluong' where id=".$_GET['update']."");
+		// if(!$sql_update_sanpham)
+		// {
+			
+		// }else{
+			
+		// 	echo $tensanpham;
+		// echo $status;
+
+		// echo $img;
+		// echo $tensanpham;
+		// echo $chitiet;
+		// echo $danhmuc;
+		// echo $sex;
+		// echo $soluong;
+		// echo $giasanpham;
+		// echo $_GET['update'];
+		// }
 	}
 	echo "<script>window.location.href='?quanly=clothes'</script>";
 	
