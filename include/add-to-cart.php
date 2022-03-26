@@ -9,15 +9,18 @@ if (isset($_POST['id'])){
     $sql_cart = mysqli_query($con, "SELECT * FROM carts WHERE '$user_id' = user_id");
      if ($sql_cart->num_rows == 0)   // user do not have cart  before
      {
-        $case1 = mysqli_query($con, "INSERT INTO carts (id,user_id) VALUES ('','$user_id')");
-         $query_cart_id = mysqli_query($con, "SELECT * FROM carts WHERE carts.user_id = '$user_id'");
+         
+        $case1 = mysqli_query($con, "INSERT INTO carts (user_id) VALUES ('$user_id')");
+        
+        $query_cart_id = mysqli_query($con, "SELECT * FROM carts WHERE carts.user_id = '$user_id'");
          $row = mysqli_fetch_row($query_cart_id);
-         $cart_id = $row[0  ];
+         $cart_id = $row[0 ];
          $result1 = mysqli_query($con, "INSERT INTO cart_details (cart_id, clothing_id, quantity) VALUES ('$cart_id','$product_id','$quantity')");
         
      }
      else if($sql_cart->num_rows > 0) // user have cart
      {
+        
         $query = "SELECT  carts.id, cart_details.clothing_id, cart_details.quantity, clothes.quantity 
          FROM `carts`  
         inner join `cart_details` on carts.id=cart_details.cart_id 
