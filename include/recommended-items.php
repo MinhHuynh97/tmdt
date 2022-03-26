@@ -1,12 +1,30 @@
 <?php
 //include_once('../database/connect.php');
-$query = "select * from clothes where 1";
+$query = "select * from clothes where clothes.status='active' and clothes.quantity > 0";
 $result = mysqli_query($con, $query);
 $group_item = '';
 $item_list = array();
 $i = 0;
 $j = 0;
+$num_item_on_cart = 0;
+$session_value = '';
+if (isset($_SESSION['id_account'])) {
+	$session_value = $_SESSION['id_account'];
+}
+
 while ($row = mysqli_fetch_array($result)) {
+	$id = $row['id'];
+	$query2 = "SELECT cart_details.quantity, clothes.quantity 
+											as cart_check FROM `cart_details`  
+											inner join `carts` on carts.id=cart_details.cart_id 
+											inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = '$session_value'";
+	$check_cart = mysqli_query($con, $query2);
+
+	if ($check_cart->num_rows != 0) {
+		$row1 = mysqli_fetch_row($check_cart);
+		$num_item_on_cart = $row1[0];
+	}
+	$remain_quantity=$row['quantity'];
 	$temp = '<div class="col-sm-4">
                     <div class="product-image-wrapper">
                         <div class="single-products">
@@ -14,7 +32,8 @@ while ($row = mysqli_fetch_array($result)) {
 							<a href="?quanly=product&id=' . $row['id'] . '"> <img src="' . $row["img"] . '" alt="" /> </a> 
                                 <h2>' . $row["price"] . '</h2>
                                 <p>' . $row["title"] . '</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <button id="add-to-cart" class="btn btn-default add-to-cart"  product-id="'.$id.'" remain-quantity="'. $remain_quantity.'" num-item-on-cart="'.$num_item_on_cart.'">
+									<i class="fa fa-shopping-cart"></i>Add to cart</button>
                             </div>                    
                         </div>
                     </div>
@@ -47,104 +66,3 @@ while (count($item_list) != 0) {
 	<a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
 		<i class="fa fa-angle-right"></i></a>
 </div>
-
-
-
-
-<!--<div class="recommended_items">recommended_items
-						<h2 class="title text-center">recommended items</h2>
-						
-						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">							
-							<div class="carousel-inner">
-								<div class="item active">	
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-                                    <div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">	
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-								<i class="fa fa-angle-left"></i>
-							  </a>
-							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-								<i class="fa fa-angle-right"></i>
-							  </a>			
-						</div>
-
-					</div>recommended_items-->
