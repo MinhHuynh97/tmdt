@@ -89,11 +89,11 @@
             </a>
 					</li>
 
-					<li class="sidebar-item">
+					<!-- <li class="sidebar-item">
 						<a class="sidebar-link" href="?quanly=rate">
               <i class="align-middle" data-feather="star"></i> <span class="align-middle">Rating</span>
             </a>
-					</li>
+					</li> -->
 					</li>
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="?quanly=blog">
