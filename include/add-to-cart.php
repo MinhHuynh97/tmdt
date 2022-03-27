@@ -29,8 +29,7 @@ if (isset($_POST['id'])){
         // do not have this item in cart
         if ($query_cart_id -> num_rows == 0)
         {
-            $recent_cart_id = mysqli_query($con,"SELECT carts.id FROM  `carts` inner join `cart_details`
-             on carts.id=cart_details.cart_id WHERE carts.user_id = '$user_id'");
+            $recent_cart_id = mysqli_query($con,"SELECT carts.id FROM  `carts`  WHERE carts.user_id = '$user_id'");
             $row = mysqli_fetch_row($recent_cart_id);
             $cart_id= $row['0'];
             $result2 = mysqli_query($con, "INSERT INTO cart_details (cart_id, clothing_id, quantity) VALUES ('$cart_id','$product_id','$quantity')");
