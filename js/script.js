@@ -109,14 +109,52 @@ $(document).ready(function () {
                     data: { id: id, quantity: quantity, user_id: user_id, remain_quantity: remain_quantity },
 
                     success: function (data) {
-
+                    //alert(data);
                         //alert('Insert đã thành công ' + id + " quantity is " + quantity + ' remain ' + remain_quantity + ' item ' + new_quantity);
-                        alert('This item has beemn added to your cart\n' + new_quantity + ' of this is on your cart now!');
+                        alert('This item has been added to your cart\n' + new_quantity + ' of this is on your cart now!');
                     }
                 })
             }
         }
 
+
+    })
+
+    $(document).on('click','#submit-review',function(){
+        var user_id = Number($('#session-value').val());
+        var id=$(this).attr('product-id');
+        var name= $('#reviewer-name').val();
+        var email=$('#reviewer-email').val();
+        var review= $('#review').val();
+        var d = new Date();  
+        var date = d.getFullYear() +'/'+(d.getMonth() +1) + '/'+ d.getDate();
+        var time = d.getHours() + ':' + d.getMinutes() ;
+        if (user_id=='')
+        {
+            alert('You must login to send your review!');
+        }
+        else if (name == ''){
+            alert('Please enter your name to send review');
+        }
+        else if( review == '')
+        {
+            alert("Please enter your review. It's empty. ");
+        }
+        else {
+           
+            $.ajax({
+                url: 'include/send-review.php',
+                method: 'POST',
+                data: {id:id, name:name, email:email, review:review, date:date, time:time},
+                success: function() {
+                    alert('Thank for your review!');
+                    //alert('date '+ date + ' time' + time + ' ' + name +' với id' + id);
+                    $('#form-review')[0].reset();
+                }
+
+
+            })
+        }
 
     })
 

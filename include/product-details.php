@@ -13,12 +13,12 @@ if (isset($_GET['id'])) {
 			<!--product-details-->
 			<div class="col-sm-5">
 				<div class="view-product">
-					<?php if (mysqli_num_rows($sql_detail) > 0) {
-						$product = mysqli_fetch_array($sql_detail);
-						$category = $product['category'];
+					<?php
+					$product = mysqli_fetch_array($sql_detail);
+					$category = $product['category'];
 					?>
-						<img src=" <?php echo $product['img'] ?>" alt="Hình ảnh minh họa" />
-						<h3>Zoom</h3>
+					<img src=" <?php echo $product['img'] ?>" alt="Hình ảnh minh họa" />
+					<h3>Zoom</h3>
 				</div>
 			</div>
 			<div class="col-sm-7">
@@ -26,19 +26,19 @@ if (isset($_GET['id'])) {
 					<!--/product-information-->
 					<img src="images/product-details/new.jpg" class="newarrival" alt="" />
 					<?php
-						if ($session_value != '') {
-							$id = $product['id'];
-							$query = "SELECT cart_details.quantity, clothes.quantity 
-											as cart_check FROM `cart_details`  
+					if ($session_value != '') {
+						$id = $_GET['id'];
+						$query = "SELECT cart_details.quantity, clothes.quantity 
+											FROM `cart_details`  
 											inner join `carts` on carts.id=cart_details.cart_id 
 											inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
-							$check_cart = mysqli_query($con, $query);
+						$check_cart = mysqli_query($con, $query);
 
-							if ($check_cart->num_rows != 0) {
-								$row = mysqli_fetch_row($check_cart);
-								$num_item_on_cart = $row[0];
-							}
+						if ($check_cart->num_rows != 0) {
+							$row = mysqli_fetch_row($check_cart);
+							$num_item_on_cart = $row[0];
 						}
+					}
 					?>
 					<input type="hidden" id="session-value" value="<?php echo $session_value ?>">
 					<h2 id="product-title"> <?php echo $product['title'] ?></h2>
@@ -84,8 +84,8 @@ if (isset($_GET['id'])) {
 				<div class="tab-pane fade" id="details">
 
 					<?php $detail = mysqli_query($con, "SELECT * FROM product_detail WHERE '$id '= id ");
-						if (mysqli_num_rows($detail) > 0) {
-							$descrip = mysqli_fetch_array($detail);
+					if (mysqli_num_rows($detail) > 0) {
+						$descrip = mysqli_fetch_array($detail);
 					?>
 						<div class="single-detail">
 							<center>
@@ -108,8 +108,8 @@ if (isset($_GET['id'])) {
 				<div class="tab-pane fade" id="related">
 					<!-- Item of the Company that related-->
 					<?php $sql_relate =  mysqli_query($con, "SELECT * FROM clothes WHERE $category = category AND clothes.status = 'active' ");
-						if (mysqli_num_rows($sql_relate) > 0) {
-							while ($relate = mysqli_fetch_array($sql_relate)) {
+					if (mysqli_num_rows($sql_relate) > 0) {
+						while ($relate = mysqli_fetch_array($sql_relate)) {
 					?>
 
 							<div class="col-sm-3 d-flex">
@@ -134,7 +134,7 @@ if (isset($_GET['id'])) {
 																inner join `carts` on carts.id=cart_details.cart_id 
 																inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
 												$check_cart = mysqli_query($con, $query);
-					
+
 												if ($check_cart->num_rows != 0) {
 													$row = mysqli_fetch_row($check_cart);
 													$num_item_on_cart = $row[0];
@@ -150,7 +150,7 @@ if (isset($_GET['id'])) {
 																	inner join `carts` on carts.id=cart_details.cart_id 
 																	inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
 													$check_cart = mysqli_query($con, $query);
-						
+
 													if ($check_cart->num_rows != 0) {
 														$row = mysqli_fetch_row($check_cart);
 														$num_item_on_cart = $row[0];
@@ -168,34 +168,40 @@ if (isset($_GET['id'])) {
 
 							</div>
 					<?php }
-						} ?>
+					} ?>
 
 				</div>
 				<div class="tab-pane fade active in" id="reviews">
 					<!-- Review about the product-->
-					<div class="col-sm-12">
-						<ul>
-							<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-							<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-							<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-						</ul>
-						<p> This is a review of the procduct from the database that add later. This is a sample of the review of the product.
-						</p>
-						<p><b>Write Your Review</b></p>
 
-						<form action="#">
-							<!-- Add the action for the review later-->
-							<span>
-								<input type="text" placeholder="Your Name" />
-								<input type="email" placeholder="Email Address" />
-							</span>
-							<textarea name=""></textarea>
-							<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-							<button type="button" class="btn btn-default pull-right">
-								Submit
-							</button>
-						</form>
+					<div class="col-sm-12">
+					<?php 
+					$new_id= $_GET['id'];	
+					$review= mysqli_query($con, "SELECT * from reviews where id ='$new_id'");
+						while($fetch_row = mysqli_fetch_array($review)){
+					?>
+						<ul>
+							<li><a href=""><i class="fa fa-user"></i><?php echo $fetch_row['name'] ?></a></li>
+							<li><a href=""><i class="fa fa-clock-o"></i> <?php echo $fetch_row['time'] ?></a></li>
+							<li><a href=""><i class="fa fa-calendar-o"></i><?php echo $fetch_row['date'] ?></a></li>
+						</ul>
+						<p> <?php echo $fetch_row['review'] ?></p>
+						<?php } ?>
 					</div>
+					<p><b>Write Your Review</b></p>
+					<form id="form-review" action="#">
+						<!-- Add the action for the review later-->
+						<span>
+							<input id="reviewer-name" type="text" placeholder="Your Name" value="" />
+							<input id="reviewer-email" type="email" placeholder="Email Address" value=""/>
+						</span>
+						<textarea id="review" value=""></textarea>
+						<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
+						<button id="submit-review" product-id="<?php echo $_GET['id']?>" type="button" class="btn btn-default pull-right">
+							Submit
+						</button>
+					</form>
+
 				</div>
 			</div>
 			<!--/category-tab-->
@@ -204,5 +210,4 @@ if (isset($_GET['id'])) {
 
 		</div>
 	</div>
-<?php }
-				} ?>
+<?php } ?>
