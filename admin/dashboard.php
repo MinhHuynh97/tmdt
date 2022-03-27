@@ -27,7 +27,7 @@
 												
 												<h1 class="mt-1 mb-3"><?php
 
-													$quan=mysqli_query($con,"SELECT SUM(ords.quantity) as total from orders as ord,order_details as ords where ord.status='completed' ");
+													$quan=mysqli_query($con,"SELECT SUM(ords.quantity) as total from orders as ord,order_details as ords where ord.id=ords.order_id and ord.status in ('confirmed','completed','shipping')");
 													$quans=mysqli_fetch_array($quan);
 													echo $quans['total'];
 
@@ -91,7 +91,7 @@
 													</div>
 												<h1 class="mt-1 mb-3"><?php
 
-													$sum=mysqli_query($con,"SELECT SUM(total) as value from orders where status='completed'");
+													$sum=mysqli_query($con,"SELECT SUM(total) as value from orders  where status in ('confirmed','completed','shipping')");
 													$rs=mysqli_fetch_array($sum);
 													echo $rs['value'];
 
@@ -229,6 +229,7 @@
 											<th class="d-none d-xl-table-cell">Total</th>
 											<th>Status</th>
 											<th class="d-none d-md-table-cell">Name customer</th>
+											<th class="d-none d-md-table-cell">Code ship</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -263,7 +264,8 @@
 											<?php
 												}
 											?>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
+											<td class="d-none d-md-table-cell"><?php echo $order['name']?></td>
+											<td class="d-none d-md-table-cell"><?php echo $order['ghn_id']?></td>
 											<td><a href="?quanly=orderdetail&od=<?php echo $order['id']?>" class="align-middle"> <i class="align-middle" data-feather="eye"></i></a></td>
 										</tr>
 										<?php 

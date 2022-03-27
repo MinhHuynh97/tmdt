@@ -33,7 +33,7 @@ if(isset($_POST['cmt']))
 					<div class="blog-post-area">
 						<h2 class="title text-center">Latest From our Blog</h2>
 						<?php
-						$blog_list_single=mysqli_query($con,"SELECT blog.id as id,blog.title as title,blog.content as content,blog.brieft as brieft, blog.date as date, blog.img as img, user_blog.name as author ,user_blog.content as cmt from blog, user_blog WHERE blog.id=user_blog.blog_id and user_blog.role='author' and blog.id=".$_GET['blog_id']." ");
+						$blog_list_single=mysqli_query($con,"SELECT blog.id as id,blog.title as title,blog.content as content,blog.brieft as brieft, blog.date as date, blog.img as img, blog.author as author ,blog.cmt as cmt from blog WHERE blog.id=".$_GET['blog_id']." ");
 						while($row_blog_single=mysqli_fetch_array($blog_list_single)){
 						?>
 						<div class="single-blog-post">
@@ -53,7 +53,7 @@ if(isset($_POST['cmt']))
 								</span> -->
 							</div>
 							<a href="">
-								<img src="images/blog/<?php echo $row_blog_single['img'] ?>" alt="">
+								<img src="<?php echo $row_blog_single['img'] ?>" alt="">
 							</a>
 							<p>
 							<?php echo $row_blog_single['content'] ?>

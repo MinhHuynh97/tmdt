@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('../database/connect.php');
 if(isset($_POST['test2']))
 {
@@ -6,7 +7,7 @@ if(isset($_POST['test2']))
     {
     $district=$_POST['district'];
     $war=$_POST['war'];
-
+       
 
 $url = "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee";
 
@@ -32,9 +33,9 @@ $data = <<<DATA
     "to_ward_code":$war,
     "height":50,
     "length":20,
-    "weight":200,
+    "weight":100,
     "width":20,
-    "insurance_value":10000,
+    "insurance_value":1000000,
     "coupon": null
     }
 DATA;
@@ -56,6 +57,7 @@ $a=json_decode($resp,true);
 //     echo "\r\n";
 // }
 $ship=ceil($a['data']['total']/23500);
+$update_Cart=mysqli_query($con,"UPDATE carts set fee='$ship',war_id='$war',district_id='$district' where user_id=".$_SESSION["id_account"]." ");
     }else{
         $ship=0;
     }

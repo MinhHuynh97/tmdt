@@ -19,10 +19,11 @@ if(isset($_POST['back']))
 	
 	$content=$_POST['content'];
 	
-	
-	
+	$author=$_SESSION["dangnhap"];
+	$cmt=$_POST['cmt'];
 	$path='../images/blog/';
-	$sql_insert_blog=mysqli_query($con,"INSERT INTO `blog` ( title, brieft, content, img, date) VALUES ('$title_blog_', '$brieft_', '$content', '$hinhanh', '$date');");
+	$img='./images/blog/'.$hinhanh;
+	$sql_insert_blog=mysqli_query($con,"INSERT INTO `blog` ( title, brieft, content, img, date,author,cmt) VALUES ('$title_blog_', '$brieft_', '$content', '$img', '$date','$author','$cmt');");
 	// $count_blog=mysqli_query($con,"SELECT max(id) as id from blog ");
 	// $rs=mysqli_fetch_assoc($count_blog);
 	// $id_blog=$rs['id'];
@@ -45,16 +46,18 @@ elseif(isset($_POST['update_blog']))
 	
 	$content=$_POST['content'];
 	
+	$cmt=$_POST['cmt'];
 	
 	
 	$path='../images/blog/';
+	$img='./images/blog/'.$hinhanh;
 	if($hinhanh=='')
 	{
-		$sql_insert_blog=mysqli_query($con,"UPDATE `blog` SET title = ".$title_blog_." , brieft = ".$brieft_.", content = ".$content." WHERE  id=".$_GET['update']."");
+		$sql_insert_blog=mysqli_query($con,"UPDATE `blog` SET title = ".$title_blog_." , brieft = ".$brieft_.", content = ".$content." ,cmt='$cmt' WHERE  id=".$_GET['update']."");
 	}else{
 		
 		move_uploaded_file($hinhanh_tmp,$path.$hinhanh);
-		$sql_insert_blog=mysqli_query($con,"UPDATE `blog` SET title = ".$title_blog_.",brieft=".$brieft_.",content=".$content.",img=".$hinhanh." WHERE  id=".$_GET['update']."");
+		$sql_insert_blog=mysqli_query($con,"UPDATE `blog` SET title = ".$title_blog_.",brieft=".$brieft_.",content=".$content.",img='$img',cmt='$cmt' WHERE  id=".$_GET['update']."");
 		
 
 	}
@@ -111,7 +114,7 @@ elseif(isset($_GET['delete']))
 											
 											<td class="text-center"><?php echo $i ?></td>
 											<td  class="text-center">
-												<img style="width: 100px;height:100px" src="../images/blog/<?php echo $row_blog['img'] ?>" alt="">
+												<img style="width: 100px;height:100px" src=".<?php echo $row_blog['img'] ?>" alt="">
 											</td>
 											<td style="width: 20px;"class="text-center"><?php echo $row_blog['title'] ?></td>
 											<td style="width:50%" class="text-center"><?php echo $row_blog['brieft'] ?></td>
@@ -161,7 +164,8 @@ elseif(isset($_GET['delete']))
 								
 									<h5 class="card-title mb-0">Content</h5>
 									<textarea name="content" class="form-control mb-3" rows="2" placeholder="Content"></textarea>
-								
+									<h5 class="card-title mb-0">Comment</h5>
+									<textarea name="cmt" class="form-control mb-3" rows="2" placeholder="Comment"></textarea>
 									<!-- <h5 class="card-title mb-0">Comment</h5>
 									<textarea name="cmt" class="form-control mb-3" rows="2" placeholder="Comment"></textarea> -->
 								<div class="text-center">
@@ -200,7 +204,8 @@ elseif(isset($_GET['delete']))
 								
 									<h5 class="card-title mb-0">Content</h5>
 									<textarea name="content" class="form-control mb-3" rows="2" placeholder="Content"></textarea>
-								
+									<h5 class="card-title mb-0">Comment</h5>
+									<textarea name="cmt" class="form-control mb-3" rows="2" placeholder="Comment"></textarea>
 									<!-- <h5 class="card-title mb-0">Comment</h5>
 									<textarea name="cmt" class="form-control mb-3" rows="2" placeholder="Comment"></textarea> -->
 								<div class="text-center">

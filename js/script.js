@@ -109,7 +109,7 @@ $(document).ready(function () {
                     data: { id: id, quantity: quantity, user_id: user_id, remain_quantity: remain_quantity },
 
                     success: function (data) {
-
+                        alert(data);
                         //alert('Insert đã thành công ' + id + " quantity is " + quantity + ' remain ' + remain_quantity + ' item ' + new_quantity);
                         alert('This item has beemn added to your cart\n' + new_quantity + ' of this is on your cart now!');
                     }

@@ -11,7 +11,7 @@ include_once('./database/connect.php');
 					<div class="blog-post-area">
 						<h2 class="title text-center">Latest From our Blog</h2>
 						<?php
-						$blog_list=mysqli_query($con,"SELECT blog.id as id,blog.title as title,blog.brieft as brieft, blog.date as date, blog.img as img, user_blog.name as author from blog, user_blog WHERE blog.id=user_blog.blog_id and user_blog.role='author'");
+						$blog_list=mysqli_query($con,"SELECT blog.id as id,blog.title as title,blog.brieft as brieft, blog.date as date, blog.img as img, blog.author as author from blog ");
 						while($row_blog=mysqli_fetch_array($blog_list)){
 						?>
 
@@ -32,7 +32,7 @@ include_once('./database/connect.php');
 								</span> -->
 							</div>
 							<a href="">
-								<img src="images/blog/<?php echo $row_blog['img'] ?>" alt="">
+								<img style="max-height:600px" src="<?php echo $row_blog['img'] ?>" alt="">
 							</a>
 							<p><?php echo $row_blog['brieft'] ?></p>
 							<a  class="btn btn-primary" href="?quanly=blogsingle&blog_id=<?php echo $row_blog['id'] ?>">Read More</a>
