@@ -1,9 +1,10 @@
 <?php 
+    session_start();
     include_once('../database/connect.php');
     if (isset($_POST['review'])){
         $id = $_POST['id'];
-        $name = $_POST['name'];
-        $email = $_POST['email'];
+        $name = $_SESSION['name'];
+        $email = $_SESSION['email'];
         $date = $_POST['date'];
         $time = $_POST['time'];
         $review = $_POST['review'];
