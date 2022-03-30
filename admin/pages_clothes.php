@@ -16,16 +16,18 @@ if(isset($_POST['back']))
 	$hinhanh=$_FILES['hinhanh']['name'];
 	
 	$hinhanh_tmp=$_FILES['hinhanh']['tmp_name'];
-	
+	$hinhanh_tmp1=$_FILES['hinhanh']['tmp_name'];
 	$giasanpham=$_POST['price'];
 	
 	$danhmuc=$_POST['cate'];
 	$sex=$_POST['sex'];
 	$soluong=$_POST['quantity'];
+	$pa='./images/';
 	$path='../images/';
-	$sql_insert_sanpham=mysqli_query($con,"INSERT INTO `clothes` (`id`, `status`, `img`, `title`, `description`, `category`, `sex`, `price`, `quantity`) VALUES (NULL, '$status', '$path$hinhanh', '$tensanpham', '$chitiet', '$danhmuc', '$sex', '$giasanpham', '$soluong');");
+	$sql_insert_sanpham=mysqli_query($con,"INSERT INTO `clothes` (`id`, `status`, `img`, `title`, `description`, `category`, `sex`, `price`, `quantity`) VALUES (NULL, '$status', '$pa$hinhanh', '$tensanpham', '$chitiet', '$danhmuc', '$sex', '$giasanpham', '$soluong');");
 	
 	move_uploaded_file($hinhanh_tmp,$path.$hinhanh);
+	
 	
 }
 elseif(isset($_POST['update']))
@@ -43,6 +45,7 @@ elseif(isset($_POST['update']))
 	$danhmuc=$_POST['cate'];
 	$sex=$_POST['sex'];
 	$soluong=$_POST['quantity'];
+	$pa='./images/';
 	$path='../images/';
 	if($hinhanh=='')
 	{
@@ -50,12 +53,13 @@ elseif(isset($_POST['update']))
 		$sql_update_sanpham=mysqli_query($con,"UPDATE`clothes` set  `status`='$status', `title`='$tensanpham', `description`='$chitiet', `category`='$danhmuc', `sex`='$sex', `price`='$giasanpham', `quantity`='$soluong' where id=".$_GET['update']."");
 	}else{
 		move_uploaded_file($hinhanh_tmp,$path.$hinhanh);
+		move_uploaded_file($hinhanh_tmp,$pa.$hinhanh);
 		$img=$path.$hinhanh;
 		
 
 
 
-		$sql_update_sanpham=mysqli_query($con,"UPDATE clothes set  status='$status', img='$img', title='$tensanpham', description='$chitiet', category='$danhmuc', sex='$sex', price='$giasanpham', quantity='$soluong' where id=".$_GET['update']."");
+		$sql_update_sanpham=mysqli_query($con,"UPDATE clothes set  status='$status', img='$pa$img', title='$tensanpham', description='$chitiet', category='$danhmuc', sex='$sex', price='$giasanpham', quantity='$soluong' where id=".$_GET['update']."");
 		// if(!$sql_update_sanpham)
 		// {
 			
@@ -127,7 +131,7 @@ elseif(isset($_GET['delete']))
 											
 											<td class="text-center"><?php echo $i ?></td>
 											<td class="text-center">
-												<img style="width: 100px;height:100px" src="<?php echo $row_clo['img'] ?>" alt="">
+												<img style="width: 100px;height:100px" src=".<?php echo $row_clo['img'] ?>" alt="">
 											</td>
 											<td style="width: 20%;"class="text-center"><?php echo $row_clo['title'] ?></td>
 											<td style="width:20px" class="text-center"><?php echo $row_clo['name'] ?></td>

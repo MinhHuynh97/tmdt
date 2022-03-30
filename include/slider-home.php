@@ -13,8 +13,8 @@
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
-									<h2>Hãy khám phá</h2>
-									<p>Hãy thể hiện cá tính riêng của bạn.</p>
+									<h2>Let's explore</h2>
+									<p>Let's show your own personality.</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -25,8 +25,8 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
-									<h2>Vẻ đẹp sang trọng</h2>
-									<p>Thời trang có thể mua được nhưng phong cách phải là điều sẵn có.</p>
+									<h2>Luxurious beauty</h2>
+									<p>Fashion can be bought, but style must be available.</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -38,8 +38,8 @@
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
-									<h2>Thời trang công sở</h2>
-									<p>ESHOP đã tự xây dựng cho mình hình ảnh người dẫn đầu, liên tục mang tới những xu hướng mới, tạo nên những trào lưu và phong cách cho giới đam mê thời trang.</p>
+									<h2>Office fashion</h2>
+									<p>ESHOP has built itself the image of a leader, constantly bringing new trends, creating trends and styles for fashion enthusiasts.</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">

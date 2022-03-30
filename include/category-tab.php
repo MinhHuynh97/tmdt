@@ -30,7 +30,7 @@ while ($row = mysqli_fetch_array($result)) {
         $query = "SELECT cart_details.quantity, clothes.quantity 
 						as cart_check FROM `cart_details`  
 						inner join `carts` on carts.id=cart_details.cart_id 
-						inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
+						inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = '$session_value'";
         $check_cart = mysqli_query($con, $query);
 
         if ($check_cart->num_rows != 0) {
