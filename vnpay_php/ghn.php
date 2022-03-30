@@ -78,7 +78,6 @@ curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
 $resp = curl_exec($curl);
 curl_close($curl);
-echo $resp;
 $x=json_decode($resp );
 $rs=$x->{'data'}->{'order_code'};
 ?>

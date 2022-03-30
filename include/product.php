@@ -97,10 +97,10 @@ if (isset($_GET['category'])) {
 
 	</div>
 	<!--features_items-->
-	<ul class="pagination">
+	<!-- <ul class="pagination">
 		<li class="active"><a href="">1</a></li>
 		<li><a href="">2</a></li>
 		<li><a href="">3</a></li>
 		<li><a href="">&raquo;</a></li>
-	</ul>
+	</ul> -->
 </div> <!-- space for item-->
