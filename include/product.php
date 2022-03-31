@@ -35,7 +35,7 @@ if (isset($_GET['category'])) {
 											inner join `carts` on carts.id=cart_details.cart_id 
 											inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = '$session_value'";
 									$check_cart = mysqli_query($con, $query);
-
+									$num_item_on_cart=0;
 									if ($check_cart->num_rows != 0) {
 										$row = mysqli_fetch_row($check_cart);
 										$num_item_on_cart = $row[0];
