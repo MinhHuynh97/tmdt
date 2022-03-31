@@ -83,7 +83,7 @@ $(document).ready(function () {
         else if ((input_quantity != undefined) && (Number(input_quantity) > remain_quantity)) {
             alert("You choose too must item ");
         }
-        else if ((input_quantity != undefined) && (input_quantity == '' || input_quantity == 0)) {
+        else if ((input_quantity != undefined) && (input_quantity == '' || input_quantity <= 0 )) {
             alert('Please choose at least one item to add to your cart!');
         }
         else {
@@ -110,8 +110,8 @@ $(document).ready(function () {
 
                     success: function (data) {
                         // alert(data);
-                        //alert('Insert đã thành công ' + id + " quantity is " + quantity + ' remain ' + remain_quantity + ' item ' + new_quantity);
-                       // alert('This item has been added to your cart\n' + new_quantity + ' of this is on your cart now!');
+                        // alert('Insert đã thành công ' + id + " quantity is " + quantity + ' remain ' + remain_quantity + ' item ' + new_quantity);
+                       alert('This item has been added to your cart of this is on your cart now!');
                     }
                 })
             }
