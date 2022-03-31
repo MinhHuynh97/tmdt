@@ -111,7 +111,7 @@ $(document).ready(function () {
                     success: function (data) {
                         // alert(data);
                         // alert('Insert đã thành công ' + id + " quantity is " + quantity + ' remain ' + remain_quantity + ' item ' + new_quantity);
-                       alert('This item has been added to your cart of this is on your cart now!');
+                       alert('This item has been added to your cart\n' + new_quantity + ' of this is on your cart now!');
                     }
                 })
             }
