@@ -32,17 +32,18 @@ while ($row = mysqli_fetch_array($result)) {
 						inner join `carts` on carts.id=cart_details.cart_id 
 						inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = '$session_value'";
         $check_cart = mysqli_query($con, $query);
-
+        $num_item_on_cart=0;
         if ($check_cart->num_rows != 0) {
             $row = mysqli_fetch_row($check_cart);
             $num_item_on_cart = $row[0];
         }
-        $tab_content .= '
+        if($sub_row['quantity'] >0){
+            $tab_content .= '
             <div class="col-sm-3">
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <img src="' . $sub_row["img"] . '" alt="" />
+                        <a href="?quanly=product&id='.$sub_row['id'].'"><img src="' . $sub_row["img"] . '" alt="" /></a>
                             <h2>' . $sub_row["price"] . '</h2>
                             <p>' . $sub_row["title"] . '</p>
                             <button id="add-to-cart" class="btn btn-default add-to-cart"  product-id="' . $sub_row['id'] . '" remain-quantity="' . $sub_row['quantity'] . '" num-item-on-cart="' . $num_item_on_cart . '">
@@ -51,6 +52,25 @@ while ($row = mysqli_fetch_array($result)) {
                     </div>
                 </div>            
         </div>';
+        }
+        
+        else{
+            $tab_content .= '
+            <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <a href="?quanly=product&id='.$sub_row['id'].'"><img src="' . $sub_row["img"] . '" alt="" /></a>
+                            
+                            <h2>' . $sub_row['price'] . '</h2>
+                            <p>' . $sub_row["title"] . '</p>
+                            <button class="btn btn-default add-to-cart"><i class="fa-solid fa-sync fa-spin"></i>Out of Stock</button>
+                        </div>                    
+                    </div>
+                </div>            
+        </div>';
+        }
+       
     }
     $tab_content .= '</div>';
     $i++;

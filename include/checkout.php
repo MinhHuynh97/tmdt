@@ -1,6 +1,6 @@
 <?php
 	$id_user=$_SESSION['id_account'];
-	$show_giohang=mysqli_query($con,"SELECT carts.id,carts.user_id,cart_details.clothing_id,clothes.status,clothes.img,clothes.title,clothes.price,cart_details.quantity,clothes.quantity as quantity_stock FROM `carts`  inner join cart_details on carts.id=cart_details.cart_id inner join clothes on cart_details.clothing_id=clothes.id ");
+	$show_giohang=mysqli_query($con,"SELECT carts.id,carts.user_id,cart_details.clothing_id,clothes.status,clothes.img,clothes.title,clothes.price,cart_details.quantity,clothes.quantity as quantity_stock FROM carts,cart_details,clothes where carts.id=cart_details.cart_id and cart_details.clothing_id=clothes.id and carts.user_id=".$_SESSION['id_account']."");
 	$subtotal=0;
 	$tong=0;
 	$items = '';

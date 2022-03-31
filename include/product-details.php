@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
 											inner join `carts` on carts.id=cart_details.cart_id 
 											inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
 							$check_cart = mysqli_query($con, $query);
-
+							$num_item_on_cart=0;
 							if ($check_cart->num_rows != 0) {
 								$row = mysqli_fetch_row($check_cart);
 								$num_item_on_cart = $row[0];
@@ -131,19 +131,19 @@ if (isset($_GET['id'])) {
 													} else echo $title; ?>
 												</p>
 												<?php
-												if ($session_value != '') {
-													$id = $product['id'];
-													$query = "SELECT cart_details.quantity, clothes.quantity 
-																as cart_check FROM `cart_details`  
-																inner join `carts` on carts.id=cart_details.cart_id 
-																inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
-													$check_cart = mysqli_query($con, $query);
-
-													if ($check_cart->num_rows != 0) {
-														$row = mysqli_fetch_row($check_cart);
-														$num_item_on_cart = $row[0];
-													}
-												}
+												// if ($session_value != '') {
+												// 	$id = $product['id'];
+												// 	$query = "SELECT cart_details.quantity, clothes.quantity 
+												// 				as cart_check FROM `cart_details`  
+												// 				inner join `carts` on carts.id=cart_details.cart_id 
+												// 				inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
+												// 	$check_cart = mysqli_query($con, $query);
+												// 	$num_item_on_cart=0;
+												// 	if ($check_cart->num_rows != 0) {
+												// 		$row = mysqli_fetch_row($check_cart);
+												// 		$num_item_on_cart = $row[0];
+												// 	}
+												// }
 
 												if ($relate['quantity'] > 0) {
 
@@ -154,7 +154,7 @@ if (isset($_GET['id'])) {
 																	inner join `carts` on carts.id=cart_details.cart_id 
 																	inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = $session_value";
 														$check_cart = mysqli_query($con, $query);
-
+														$num_item_on_cart=0;
 														if ($check_cart->num_rows != 0) {
 															$row = mysqli_fetch_row($check_cart);
 															$num_item_on_cart = $row[0];

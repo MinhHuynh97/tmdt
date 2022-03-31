@@ -190,7 +190,7 @@ elseif(isset($_POST['add']))
 											<td style="width:10%" class="text-center"><?php echo $row_clothes['id']?></td>
 											<td style="width:40%" class="text-center ">
 												<div class="col-6 col-md-4 col-lg-4 col-xl-3 d-inline-block">
-													<img src="<?php echo $row_clothes['img']?>" class="img-fluid pe-2" alt="Unsplash">
+													<img src=".<?php echo $row_clothes['img']?>" class="img-fluid pe-2" alt="Unsplash">
 												</div>
 												
 											</td>

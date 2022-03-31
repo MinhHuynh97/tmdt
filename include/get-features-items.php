@@ -37,22 +37,35 @@ while ($row = mysqli_fetch_array($result)) {
 						inner join `carts` on carts.id=cart_details.cart_id 
 						inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = '$session_value'";
 						$check_cart = mysqli_query($con, $query2);
-
+						$num_item_on_cart=0;
 						if ($check_cart->num_rows != 0) {
 							$row = mysqli_fetch_row($check_cart);
 							$num_item_on_cart = $row[0];
 						}
 					}
 					?>
-					<button id="add-to-cart" class="btn btn-default add-to-cart"  product-id="<?php echo $id?>" remain-quantity="<?php echo $remain_quantity?>" num-item-on-cart="<?php echo $num_item_on_cart?>">
-									<i class="fa fa-shopping-cart"></i>Add to cart</button>
+					<?php
+								if ($remain_quantity > 0) {
+									echo "<button id='add-to-cart' class='btn btn-default add-to-cart'  product-id='".$id."' remain-quantity='". $remain_quantity."' num-item-on-cart='". $num_item_on_cart."'>
+									<i class='fa fa-shopping-cart'></i>Add to cart</button>";
+								} else {
+									echo "<button class='btn btn-default add-to-cart'><i class='fa-solid fa-sync fa-spin'></i>Out of Stock</button>";
+								}
+								?>
+					
 				</div>
 				<div class="product-overlay">
 					<div class="overlay-content">
 						<h2><?= $price; ?>$</h2>
 						<p><?= $title; ?></p>
-						<button id="add-to-cart" class="btn btn-default add-to-cart"  product-id="<?php echo $id?>" remain-quantity="<?php echo $remain_quantity?>" num-item-on-cart="<?php echo $num_item_on_cart?>">
-									<i class="fa fa-shopping-cart"></i>Add to cart</button>
+						<?php
+								if ($remain_quantity > 0) {
+									echo "<button id='add-to-cart' class='btn btn-default add-to-cart'  product-id='".$id."' remain-quantity='". $remain_quantity."' num-item-on-cart='". $num_item_on_cart."'>
+									<i class='fa fa-shopping-cart'></i>Add to cart</button>";
+								} else {
+									echo "<button class='btn btn-default add-to-cart'><i class='fa-solid fa-sync fa-spin'></i>Out of Stock</button>";
+								}
+								?>
 					</div>
 				</div>
 			</div>

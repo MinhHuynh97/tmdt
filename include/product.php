@@ -35,7 +35,7 @@ if (isset($_GET['category'])) {
 											inner join `carts` on carts.id=cart_details.cart_id 
 											inner join `clothes` on cart_details.clothing_id=clothes.id WHERE cart_details.clothing_id = '$id' and carts.user_id = '$session_value'";
 									$check_cart = mysqli_query($con, $query);
-
+									$num_item_on_cart=0;
 									if ($check_cart->num_rows != 0) {
 										$row = mysqli_fetch_row($check_cart);
 										$num_item_on_cart = $row[0];
@@ -47,7 +47,7 @@ if (isset($_GET['category'])) {
 								<input type="hidden" id="session-value" value="<?php echo $session_value ?>">
 								<!--check total item after adding is out of range-->
 								<img id="product-img" src=" <?php echo  $product['img'] ?> " alt="Hình ảnh sản phẩm" />
-								<h2 id="product-price"> $ <?php echo $product['price'] ?></h2>
+								<h2 id="product-price"> $ <?php echo $product['price'] ?>$</h2>
 								<p id="product-title"> <?php $title = $product['title'];
 														if (str_word_count($title) > 4) {
 															$piece = explode(" ", $title);
@@ -68,7 +68,7 @@ if (isset($_GET['category'])) {
 
 							<div class="product-overlay">
 								<div class="overlay-content">
-									<h2> $ <?php echo $product['price'] ?></h2>
+									<h2> $ <?php echo $product['price'] ?>$</h2>
 									<p> <?php echo $product['title'] ?> </p>
 
 									<?php if ($product['quantity'] > 0) {

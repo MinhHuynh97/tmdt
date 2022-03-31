@@ -39,7 +39,7 @@ include_once('../database/connect.php');
 											<td class="text-center"><?php echo $i ?></td>
 											<td class="text-center '">
 												
-													<img style='height:150px; width=350px' src="<?php echo $row_order_detail['img'] ?>" class="img-fluid pe-2" alt="Unsplash">
+													<img style='height:150px; width=350px' src=".<?php echo $row_order_detail['img'] ?>" class="img-fluid pe-2" alt="Unsplash">
 												
 												
 											</td>
