@@ -83,7 +83,7 @@ $(document).ready(function () {
         else if ((input_quantity != undefined) && (Number(input_quantity) > remain_quantity)) {
             alert("You choose too must item ");
         }
-        else if ((input_quantity != undefined) && (input_quantity == '' || input_quantity == 0)) {
+        else if ((input_quantity != undefined) && (input_quantity == '' || input_quantity <= 0 )) {
             alert('Please choose at least one item to add to your cart!');
         }
         else {

@@ -37,7 +37,8 @@ while ($row = mysqli_fetch_array($result)) {
             $row = mysqli_fetch_row($check_cart);
             $num_item_on_cart = $row[0];
         }
-        $tab_content .= '
+        if($sub_row['quantity'] >0){
+            $tab_content .= '
             <div class="col-sm-3">
                 <div class="product-image-wrapper">
                     <div class="single-products">
@@ -51,6 +52,23 @@ while ($row = mysqli_fetch_array($result)) {
                     </div>
                 </div>            
         </div>';
+        }
+        else{
+            $tab_content .= '
+            <div class="col-sm-3">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="' . $sub_row["img"] . '" alt="" />
+                            <h2>' . $sub_row["price"] . '</h2>
+                            <p>' . $sub_row["title"] . '</p>
+                            <button class="btn btn-default add-to-cart"><i class="fa-solid fa-sync fa-spin"></i>Out of Stock</button>
+                        </div>                    
+                    </div>
+                </div>            
+        </div>';
+        }
+       
     }
     $tab_content .= '</div>';
     $i++;
