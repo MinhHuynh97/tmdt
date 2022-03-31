@@ -24,9 +24,15 @@ function checkSignup() {
             data: {
                 email: document.getElementById("email-signup").value,
                 password: document.getElementById("password-signup").value,
-                name: document.getElementById("name-signup").value
+                name: document.getElementById("name-signup").value,
+                phone: document.getElementById("phone-signup").value,
+                
+                address: document.getElementById("address-signup").value
+
+
             },
-            success: function(response){            		       
+            success: function(response){  
+                         		       
                 handleMsg(response);		   
             }
          });	

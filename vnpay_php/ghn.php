@@ -5,7 +5,7 @@ include("../database/connect.php");
 $a=array();
 $id_=$_SESSION["id_account"];
 
-$clothes=mysqli_query($con,"SELECT clothes.id as id,cart_details.quantity as quantity, categories.name as name_cate, clothes.price as price, clothes.title as name_clothes FROM carts,cart_details,clothes, categories WHERE carts.id=cart_details.cart_id and cart_details.clothing_id=clothes.id and clothes.id=categories.id and carts.user_id=$id_ ");
+$clothes=mysqli_query($con,"SELECT clothes.id as id,cart_details.quantity as quantity, clothes.price as price, clothes.title as name_clothes FROM carts,cart_details,clothes WHERE carts.id=cart_details.cart_id and cart_details.clothing_id=clothes.id and carts.user_id=$id_");
 while($row_clothes=mysqli_fetch_array($clothes))
 {
     $r=	

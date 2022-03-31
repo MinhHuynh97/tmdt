@@ -44,15 +44,28 @@ while ($row = mysqli_fetch_array($result)) {
 						}
 					}
 					?>
-					<button id="add-to-cart" class="btn btn-default add-to-cart"  product-id="<?php echo $id?>" remain-quantity="<?php echo $remain_quantity?>" num-item-on-cart="<?php echo $num_item_on_cart?>">
-									<i class="fa fa-shopping-cart"></i>Add to cart</button>
+					<?php
+								if ($remain_quantity > 0) {
+									echo "<button id='add-to-cart' class='btn btn-default add-to-cart'  product-id='".$id."' remain-quantity='". $remain_quantity."' num-item-on-cart='". $num_item_on_cart."'>
+									<i class='fa fa-shopping-cart'></i>Add to cart</button>";
+								} else {
+									echo "<button class='btn btn-default add-to-cart'><i class='fa-solid fa-sync fa-spin'></i>Out of Stock</button>";
+								}
+								?>
+					
 				</div>
 				<div class="product-overlay">
 					<div class="overlay-content">
 						<h2><?= $price; ?>$</h2>
 						<p><?= $title; ?></p>
-						<button id="add-to-cart" class="btn btn-default add-to-cart"  product-id="<?php echo $id?>" remain-quantity="<?php echo $remain_quantity?>" num-item-on-cart="<?php echo $num_item_on_cart?>">
-									<i class="fa fa-shopping-cart"></i>Add to cart</button>
+						<?php
+								if ($remain_quantity > 0) {
+									echo "<button id='add-to-cart' class='btn btn-default add-to-cart'  product-id='".$id."' remain-quantity='". $remain_quantity."' num-item-on-cart='". $num_item_on_cart."'>
+									<i class='fa fa-shopping-cart'></i>Add to cart</button>";
+								} else {
+									echo "<button class='btn btn-default add-to-cart'><i class='fa-solid fa-sync fa-spin'></i>Out of Stock</button>";
+								}
+								?>
 					</div>
 				</div>
 			</div>

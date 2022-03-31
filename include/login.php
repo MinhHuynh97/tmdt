@@ -56,6 +56,9 @@
 						<form method="POST">
 							<input type="text" id='name-signup' placeholder="Name"/>
 							<input type="email" id='email-signup' placeholder="Email Address"/>
+							<input type="phone" id='phone-signup' placeholder="Phone"/>
+							<!-- <input type="date" id='date-signup' placeholder="Birthday"/> -->
+							<input type="address" id='address-signup' placeholder="Address"/>
 							<input type="password" id='password-signup' placeholder="Password"/>
 							<div id="error-msg2"></div>
 							<button type="button" class="btn btn-default" onclick="checkSignup()">SignUp</button>

@@ -62,7 +62,7 @@ $update_Cart=mysqli_query($con,"UPDATE carts set fee='$ship',war_id='$war',distr
         $ship=0;
     }
 
-    $total=mysqli_query($con, "SELECT SUM(cart_details.quantity*clothes.price) as total  FROM cart_details,clothes WHERE cart_details.clothing_id=clothes.id");
+    $total=mysqli_query($con, "SELECT SUM(cart_details.quantity*clothes.price) as total  FROM cart_details,clothes, carts WHERE cart_details.clothing_id=clothes.id and carts.id=cart_details.cart_id and carts.user_id=".$_SESSION['id_account']."");
     $row_total=mysqli_fetch_array($total);
     
     $row_total_res=0;
